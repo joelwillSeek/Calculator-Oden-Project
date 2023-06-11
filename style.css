@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: var(--lightish-purple);
+}
+
+:root {
+  --dark-purple: #393646;
+  --less-dark-purple: #4f4557;
+  --dim-purple: #6d5d6e;
+  --purple: #6d5d6e;
+  --lightish-purple: #f4eee0;
+}
+
+body {
+  background-color: var(--dark-purple);
+  box-sizing: border-box;
+  height: 100vh;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  border: 1px solid var(--lightish-purple);
+  border-radius: 10px;
+  justify-content: center;
+  padding: 50px;
+  align-items: center;
+  width: 30%;
+}
+
+.calculator > .display {
+  width: 100%;
+  height: 30px;
+  padding: 10px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--lightish-purple);
+  border-radius: 10px;
+}
+
+.calculator > .number-and-opertation-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid var(--lightish-purple);
+  width: 100%;
+  border-radius: 10px;
+}
+
+.calculator > .number-and-opertation-container > .number {
+  border: 1px solid var(--lightish-purple);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  flex-basis: 80%;
+  flex-grow: 1.5;
+}
+
+.calculator > .number-and-opertation-container > .number > .group-of-keys;
