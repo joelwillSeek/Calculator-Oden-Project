@@ -31,7 +31,7 @@ body {
   border: 1px solid var(--lightish-purple);
   border-radius: 10px;
   justify-content: center;
-  padding: 50px;
+  padding: 20px 40px;
   align-items: center;
   width: 30%;
 }
@@ -40,13 +40,13 @@ body {
   width: 100%;
   height: 30px;
   padding: 10px;
-  margin: 20px;
+  margin: 0 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 1px solid var(--lightish-purple);
-  border-radius: 10px;
+  border-radius: 10px 0 10px 0;
 }
 
 .calculator > .number-and-opertation-container {

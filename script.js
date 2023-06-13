@@ -1,11 +1,3 @@
-/**
- * TODO
- * ->Once the operate is called then display solution
- * ->evaluate postfix
- * ->Create and class for stack
- * ->postfix class if possible
- ***/
-
 //the users input
 let infix = [];
 
@@ -93,6 +85,16 @@ const displayUpdate = (num) => (displayElement.textContent += num);
 const pastDisplayClear = () => (pastDisplayElement.textContent = "");
 const pastDisplayUpdate = (num) => (pastDisplayElement.textContent += num);
 
+//stack class
+function Stack() {
+  //stack is private
+  let stack = [];
+  this.getTop = () => stack[stack.length - 1];
+  this.addTop = (val) => stack.push(val);
+  this.getAndRemoveTop = () => stack.pop();
+  this.getLength = () => stack.length;
+}
+
 /**
  *
  * @param {Array} postfix
@@ -149,7 +151,7 @@ const evaluateAndDisplay = () => {
  */
 const infix_to_postfix = () => {
   let postfix = [];
-  let stack = [];
+  let stack = new Stack();
   for (let i = 0; i < infix.length; i++) {
     let input = infix[i];
     //check if character is number
@@ -159,46 +161,66 @@ const infix_to_postfix = () => {
       //if input special charater
       if (input == "(" || input == "^") {
         //checks if input is '(' or '^' then push to stack
-        stack.push(input);
+        //stack.push(input);
+        stack.addTop(input);
       } else if (input == "/" || input == "*") {
         //checks if input is '/' or '*' then if the top stack is '+' or '-' then push
-        if (stack[stack.length - 1] == "+" || stack[stack.length - 1] == "-") {
-          stack.push(input);
+        //if (stack[stack.length - 1] == "+" || stack[stack.length - 1] == "-") {
+        if (stack.getTop() == "+" || stack.getTop() == "-") {
+          //stack.push(input);
+          stack.addTop(input);
         } else {
           while (
             //if it is "*" or "/" or "^" then pop until no higher precedence then add to stack
-            stack[stack.length - 1] == "^" ||
-            stack[stack.length - 1] == "*" ||
-            stack[stack.length - 1] == "/"
+            // stack[stack.length - 1] == "^" ||
+            // stack[stack.length - 1] == "*" ||
+            // stack[stack.length - 1] == "/"
+            stack.getTop() == "^" ||
+            stack.getTop() == "*" ||
+            stack.getTop() == "/"
           ) {
-            postfix.push(stack.pop());
+            //postfix.push(stack.pop());
+            postfix.push(stack.getAndRemoveTop());
           }
-          stack.push(input);
+          //stack.push(input);
+          stack.addTop(input);
         }
       } else if (input == "+" || input == "-") {
         //if input is '+' or '-' then must check all higher and equal precedence then push
         while (
-          stack[stack.length - 1] == "^" ||
-          stack[stack.length - 1] == "*" ||
-          stack[stack.length - 1] == "/" ||
-          stack[stack.length - 1] == "+" ||
-          stack[stack.length - 1] == "-"
+          // stack[stack.length - 1] == "^" ||
+          // stack[stack.length - 1] == "*" ||
+          // stack[stack.length - 1] == "/" ||
+          // stack[stack.length - 1] == "+" ||
+          // stack[stack.length - 1] == "-"
+          stack.getTop() == "^" ||
+          stack.getTop() == "*" ||
+          stack.getTop() == "/" ||
+          stack.getTop() == "+" ||
+          stack.getTop() == "-"
         ) {
-          postfix.push(stack.pop());
+          //postfix.push(stack.pop());
+          postfix.push(stack.getAndRemoveTop());
         }
-        stack.push(input);
+        //stack.push(input);
+        stack.addTop(input);
       } else if (input == ")") {
-        while (stack[stack.length - 1] != "(") {
-          postfix.push(stack.pop());
+        //while (stack[stack.length - 1] != "(") {
+        while (stack.getTop() != "(") {
+          //postfix.push(stack.pop());
+          postfix.push(stack.getAndRemoveTop());
         }
-        stack.pop();
+        //stack.pop();
+        stack.getAndRemoveTop();
       }
     }
   }
 
   //empty the stack
-  while (stack.length != 0) {
-    postfix.push(stack.pop());
+  //while (stack.length != 0) {
+  while (stack.getLength() != 0) {
+    // postfix.push(stack.pop());
+    postfix.push(stack.getAndRemoveTop());
   }
 
   return postfix;
